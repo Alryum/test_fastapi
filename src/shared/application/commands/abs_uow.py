@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
-
+from typing import Self
 
 class AbstractUOW(ABC):
     @abstractmethod
-    async def __aenter__(self):
-        pass
+    async def __aenter__(self) -> Self:
+        return self
 
     @abstractmethod
     async def __aexit__(self, ex_type, ex_instance, ex_traceback):
@@ -13,7 +13,7 @@ class AbstractUOW(ABC):
 
     @abstractmethod
     async def rollback(self):
-        pass
+        await self.rollback()
 
     @abstractmethod
     async def commit(self):
