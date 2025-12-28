@@ -13,4 +13,4 @@ async_session_factory: async_sessionmaker = async_sessionmaker(
 
 
 def build_create_command_handler():
-    return CreateItemCommand(ItemUOW(async_session_factory))
+    return CreateItemCommand(unit_of_work=ItemUOW(async_session_factory))
