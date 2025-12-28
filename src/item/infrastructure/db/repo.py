@@ -17,4 +17,4 @@ class ItemRepository(ItemRepositoryInterface, SQLAlchemyRepo):
             db_models.Item,
         ).where(db_models.Item.name == name)
         item_orm = await self._session.scalar(statement)
-        return build_agg(item_orm)
+        return build_agg(item_orm) if item_orm else None

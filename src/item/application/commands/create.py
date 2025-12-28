@@ -18,6 +18,6 @@ class CreateItemCommand:
         async with self._uow as uow:
             if await uow.repo_interface.get_by_name(name=name):
                 raise Exception("ZALUPA")
-            aggregate_item = Item(name=name, description=description)
+            aggregate_item = Item.create(name=name, description=description)
             await uow.repo_interface.create(aggregate_item)
-            await uow.repo_interface.commit()
+            await uow.commit()
